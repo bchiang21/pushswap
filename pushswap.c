@@ -6,41 +6,69 @@ buffer = string
 1. sa (swap a): Swap the first 2 elements at the top of stack a.
 Do nothing if there is only one element or none.
 
-if (array < 2) return;
-string length the array;
-temp == array[last];
-array[last] == array[second last]
-array[second last] == temp
+sa(a, size_a)
+{
+    if size_a < 2;
+    return;
+
+    temp == a[0];
+    a[0] == a[1];
+    a[1] == temp;
+
+    print "sa\n"
+
+}
 
 2. sb (swap b): Swap the first 2 elements at the top of stack b.
 Do nothing if there is only one element or none.
 
-if array == null or == array[0], return null;
-string length the array;
-temp == array[last];
-array[last] == array[second last]
-array[second last] == temp
+sb(b, size_b)
+{
+    if size_b < 2;
+    return;
+
+    temp == b[0];
+    b[0] == b[1];
+    b[1] == temp;
+
+    print sb\n
+
+}
 
 3. ss : sa and sb at the same time.
 
 function_ss()
 {
-    function_sa(); 
-    function_sb();
+    no_print_function_sa(); 
+    no_print_function_sb();
 } 
 
 4. pa (push a): Take the first element at the top of b and put it at the top of a.
 Do nothing if b is empty
 
 pa(a, size_a, b, size_b);
-if size_b == 0;
+if size_b < 0;
     return
 
-    value = b[size_b -1]
-    size_b--
+    temp = b[0]
 
-    a[size_a] == value
-    a++
+      i = 0
+    while i < *size_b - 1:
+        b[i] = b[i + 1]
+        i++
+
+        size_b = size_b - 1
+
+    i = size_a
+    while size_a > 0
+    a[i] = a[i - 1]
+    i--
+
+    a[0] == temp
+
+    size_a = size_a + 1
+
+    print pa
 
 5. pb (push b): Take the first element at the top of a and put it at the top of b.
 Do nothing if a is empty.
