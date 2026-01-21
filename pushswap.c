@@ -180,6 +180,8 @@ void pa(int *a, int *b, int *size_a, int *size_b)
         return;
 
     value = b[0];
+
+    // remove top of B
     i = 0;
     while (i < *size_b - 1)
     {
@@ -187,10 +189,21 @@ void pa(int *a, int *b, int *size_a, int *size_b)
         i++;
     }
     (*size_b)--;
-    a[*size_a] = value;
+
+    // make room at top of A
+    i = *size_a;
+    while (i > 0)
+    {
+        a[i] = a[i - 1];
+        i--;
+    }
+
+    a[0] = value;
     (*size_a)++;
+
     write(1, "pa\n", 3);
 }
+
 
 void pb(int *a, int *b, int *size_a, int *size_b)
 {
@@ -201,6 +214,8 @@ void pb(int *a, int *b, int *size_a, int *size_b)
         return;
 
     value = a[0];
+
+    // remove top of A
     i = 0;
     while (i < *size_a - 1)
     {
@@ -208,39 +223,207 @@ void pb(int *a, int *b, int *size_a, int *size_b)
         i++;
     }
     (*size_a)--;
-    b[*size_b] = value;
+
+    // make room at top of B
+    i = *size_b;
+    while (i > 0)
+    {
+        b[i] = b[i - 1];
+        i--;
+    }
+
+    b[0] = value;
     (*size_b)++;
+
     write(1, "pb\n", 3);
 }
 
-// === Your print helper (for debug) ===
-static void print_stacks(int *a, int *b, int size_a, int size_b)
+
+/* ************************************************************************** */
+/*  push_swap_selection.c                                                     */
+/*  Array-based push_swap selection-sort strategy (top is A[0])               */
+/* ************************************************************************** */
+
+#include <unistd.h>
+#include <stdlib.h>
+#include <limits.h>
+
+static void	putstr(const char *s)
 {
-    int i;
-
-    printf("\nA (%d): ", size_a);
-    i = 0;
-    while (i < size_a)
-    {
-        printf("%d ", a[i]);
-        i++;
-    }
-    printf("\n");
-
-    printf("B (%d): ", size_b);
-    i = 0;
-    while (i < size_b)
-    {
-        printf("%d ", b[i]);
-        i++;
-    }
-    printf("\n");
+	while (*s)
+		write(1, s++, 1);
 }
 
-// === main ===
-int main(void)
+static int	is_space(char c)
 {
-   
-
-    return (0);
+	return (c == ' ' || c == '\t' || c == '\n'
+		|| c == '\v' || c == '\f' || c == '\r');
 }
+
+/* Strict atoi: returns 1 on success, 0 on error (non-int / overflow / junk) */
+static int	parse_int(const char *s, int *out)
+{
+	long	sign;
+	long	val;
+
+	while (*s && is_space(*s))
+		s++;
+	sign = 1;
+	if (*s == '+' || *s == '-')
+	{
+		if (*s == '-')
+			sign = -1;
+		s++;
+	}
+	if (*s < '0' || *s > '9')
+		return (0);
+	val = 0;
+	while (*s >= '0' && *s <= '9')
+	{
+		val = val * 10 + (*s - '0');
+		if (sign * val > INT_MAX || sign * val < INT_MIN)
+			return (0);
+		s++;
+	}
+	while (*s && is_space(*s))
+		s++;
+	if (*s != '\0')
+		return (0);
+	*out = (int)(sign * val);
+	return (1);
+}
+
+static void	error_exit(void)
+{
+	write(2, "Error\n", 6);
+	exit(1);
+}
+
+static int	has_duplicates(int *a, int n)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < n)
+	{
+		j = i + 1;
+		while (j < n)
+		{
+			if (a[i] == a[j])
+				return (1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
+static int	is_sorted(int *a, int n)
+{
+	int i;
+
+	i = 0;
+	while (i + 1 < n)
+	{
+		if (a[i] > a[i + 1])
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+/* ===================== selection-sort strategy ===================== */
+
+static int	index_of_min(int *a, int size_a)
+{
+	int i;
+	int min_i;
+
+	i = 1;
+	min_i = 0;
+	while (i < size_a)
+	{
+		if (a[i] < a[min_i])
+			min_i = i;
+		i++;
+	}
+	return (min_i);
+}
+
+static void	rotate_min_to_top(int *a, int size_a)
+{
+	int i;
+
+	i = index_of_min(a, size_a);
+	if (i <= size_a / 2)
+	{
+		while (i > 0)
+		{
+			ra(a, &size_a);
+			i--;
+		}
+	}
+	else
+	{
+		while (i < size_a)
+		{
+			rra(a, &size_a);
+			i++;
+		}
+	}
+}
+
+static void algo_selection(int *a, int *size_a, int *b, int *size_b)
+{
+    if (is_sorted(a, *size_a))
+        return;
+
+    while (*size_a > 0)
+    {
+        rotate_min_to_top(a, *size_a);
+        pb(a, b, size_a, size_b);   // <-- fixed
+    }
+    while (*size_b > 0)
+        pa(a, b, size_a, size_b);   // <-- fixed
+}
+
+
+/* ===================== main ===================== */
+
+int	main(int argc, char **argv)
+{
+	int	*a;
+	int	*b;
+	int	size_a;
+	int	size_b;
+	int	i;
+
+	if (argc <= 1)
+		return (0);
+
+	size_a = argc - 1;
+	size_b = 0;
+
+	a = (int *)malloc(sizeof(int) * size_a);
+	b = (int *)malloc(sizeof(int) * size_a);
+	if (!a || !b)
+		error_exit();
+
+	i = 0;
+	while (i < size_a)
+	{
+		if (!parse_int(argv[i + 1], &a[i]))
+			error_exit();
+		i++;
+	}
+	if (has_duplicates(a, size_a))
+		error_exit();
+
+	algo_selection(a, &size_a, b, &size_b);
+
+	free(a);
+	free(b);
+	return (0);
+}
+
