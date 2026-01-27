@@ -15,7 +15,7 @@
 #include <limits.h>
 #include "push_swap.h"
 
-/* ===================== rank compression (value -> index) ===================== */
+/*  rank compression (value -> index) */
 
 void	bubble_sort(int *arr, int n)
 {

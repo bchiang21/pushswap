@@ -25,33 +25,29 @@ int	is_space(char c)
 
 int	parse_int(const char *s, int *out)
 {
-	long	sign;
 	long	val;
+	int		sign;
 
+	val = 0;
+	sign = 1;
 	while (*s && is_space(*s))
 		s++;
-	sign = 1;
 	if (*s == '+' || *s == '-')
-	{
-		if (*s == '-')
+		if (*s++ == '-')
 			sign = -1;
-		s++;
-	}
 	if (*s < '0' || *s > '9')
 		return (0);
-	val = 0;
 	while (*s >= '0' && *s <= '9')
 	{
-		val = val * 10 + (*s - '0');
-		if (sign * val > INT_MAX || sign * val < INT_MIN)
+		val = val * 10 + (*s++ - '0');
+		if (val * sign > INT_MAX || val * sign < INT_MIN)
 			return (0);
-		s++;
 	}
 	while (*s && is_space(*s))
 		s++;
-	if (*s != '\0')
+	if (*s)
 		return (0);
-	*out = (int)(sign * val);
+	*out = (int)(val * sign);
 	return (1);
 }
 

@@ -15,7 +15,7 @@
 #include <limits.h>
 #include "push_swap.h"
 
-/* ===================== core ops (no printing) ===================== */
+/*  core ops (no printing)  */
 
 void	sa_core(int *a, int *size_a)
 {
@@ -39,7 +39,7 @@ void	sb_core(int *b, int *size_b)
 	b[1] = tmp;
 }
 
-/* ===================== push (top is index 0) ===================== */
+/*  push (top is index 0)  */
 
 void	pa(int *a, int *b, int *size_a, int *size_b)
 {
@@ -67,7 +67,7 @@ void	pa(int *a, int *b, int *size_a, int *size_b)
 	write(1, "pa\n", 3);
 }
 
-void	pb(int *a, int *size_a, int *b, int *size_b)
+void	pb(int *a, int *b, int *size_a, int *size_b)
 {
 	int	value;
 	int	i;

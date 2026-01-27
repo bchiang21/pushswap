@@ -17,7 +17,7 @@
 # include <unistd.h>
 # include <limits.h>
 
-/* ===================== operations ===================== */
+/*  operations  */
 
 void	sa(int *a, int *size_a);
 void	sb(int *b, int *size_b);
@@ -34,14 +34,14 @@ void	rb_core(int *a, int *size_a);
 void	rra_core(int *a, int *size_a);
 void	rrb_core(int *a, int *size_a);
 
-/* ===================== parsing / utils ===================== */
+/*  parsing / utils  */
 
 int		parse_int(const char *s, int *out);
 int		has_duplicates(int *a, int n);
 int		is_sorted(int *a, int n);
 void	error_exit(void);
 
-/* ===================== algorithms ===================== */
+/*  algorithms  */
 
 void	compress_to_ranks(int *a, int n);
 

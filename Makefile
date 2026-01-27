@@ -23,7 +23,8 @@ SRCS	= main.c \
 		  core_func_print.c \
 		  func_print_2.c \
 		  utilities.c \
-		  if_small.c 
+		  if_small.c \
+		  if_very_small.c
 
 OBJS	= $(SRCS:.c=.o)
 
