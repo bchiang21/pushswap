@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   rank_compress.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bchiang <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: bchiang <bchiang@42singapore.sg>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 17:25:37 by bchiang           #+#    #+#             */
 /*   Updated: 2026/01/26 17:25:39 by bchiang          ###   ########.fr       */

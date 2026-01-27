@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   func_rotate.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bchiang <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: bchiang <bchiang@42singapore.sg>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 17:24:58 by bchiang           #+#    #+#             */
 /*   Updated: 2026/01/26 17:25:01 by bchiang          ###   ########.fr       */

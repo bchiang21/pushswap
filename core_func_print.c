@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   core_func_print.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bchiang <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: bchiang <bchiang@42singapore.sg>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 17:24:12 by bchiang           #+#    #+#             */
 /*   Updated: 2026/01/26 17:24:24 by bchiang          ###   ########.fr       */

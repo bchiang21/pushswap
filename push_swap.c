@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bchiang <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: bchiang <bchiang@42singapore.sg>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 17:25:19 by bchiang           #+#    #+#             */
 /*   Updated: 2026/01/26 17:25:21 by bchiang          ###   ########.fr       */
