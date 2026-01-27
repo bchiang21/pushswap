@@ -15,8 +15,6 @@
 #include <limits.h>
 #include "push_swap.h"
 
-static int	g_bit;
-
 int	max_bits_needed(int n)
 {
 	int	bits;
@@ -27,39 +25,41 @@ int	max_bits_needed(int n)
 	return (bits);
 }
 
-static void	radix_pass(int *a, int *size_a, int *b, int *size_b)
+static void	radix_pass(int **p, int bit)
 {
 	int	i;
 	int	n;
 
-	n = *size_a;
+	n = *(p[2]);
 	i = 0;
-	while (i < n)
+	while (i++ < n)
 	{
-		if (((a[0] >> g_bit) & 1) == 0)
-			pb(a, b, size_a, size_b);
+		if (((p[0][0] >> bit) & 1) == 0)
+			pb(p[0], p[1], p[2], p[3]);
 		else
-			ra(a, size_a);
-		i++;
+			ra(p[0], p[2]);
 	}
-	while (*size_b > 0)
-		pa(a, b, size_a, size_b);
+	while (*(p[3]) > 0)
+		pa(p[0], p[1], p[2], p[3]);
 }
 
 void	algo_radix(int *a, int *size_a, int *b, int *size_b)
 {
+	int	*ctx[4];
+	int	bit;
 	int	max_bits;
 
 	if (*size_a <= 1 || is_sorted(a, *size_a))
 		return ;
 	compress_to_ranks(a, *size_a);
+	ctx[0] = a;
+	ctx[1] = b;
+	ctx[2] = size_a;
+	ctx[3] = size_b;
 	max_bits = max_bits_needed(*size_a);
-	g_bit = 0;
-	while (g_bit < max_bits)
-	{
-		radix_pass(a, size_a, b, size_b);
-		g_bit++;
-	}
+	bit = 0;
+	while (bit < max_bits)
+		radix_pass(ctx, bit++);
 }
 
 int	try_tiny_sort(int *a, int *size_a, int *b, int *size_b)

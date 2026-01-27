@@ -40,6 +40,7 @@ int		parse_int(const char *s, int *out);
 int		has_duplicates(int *a, int n);
 int		is_sorted(int *a, int n);
 void	error_exit(void);
+int		index_of_min(int *a, int size_a);
 
 /*  algorithms  */
 

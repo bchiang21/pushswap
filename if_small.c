@@ -15,7 +15,7 @@
 #include <limits.h>
 #include "push_swap.h"
 
-static int	index_of_min(int *a, int size_a)
+int	index_of_min(int *a, int size_a)
 {
 	int	i;
 	int	min_i;
