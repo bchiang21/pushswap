@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utilities.c                                        :+:      :+:    :+:   */
+/*   utilities_3.c                                        :+:      :+:    :+: */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bchiang <bchiang@42singapore.sg>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -15,44 +15,36 @@
 #include <limits.h>
 #include "push_swap.h"
 
-int	is_space(char c)
+int	is_sorted(int *a, int n)
 {
-	return (c == ' ' || c == '\t' || c == '\n'
-		|| c == '\v' || c == '\f' || c == '\r');
-}
+	int	i;
 
-int	is_digit(char c)
-{
-	return (c >= '0' && c <= '9');
-}
-
-void	error_exit(void)
-{
-	write(2, "Error\n", 6);
-	exit(1);
-}
-
-int	skip_spaces(const char **ps)
-{
-	while (**ps && is_space(**ps))
-		(*ps)++;
-	if (!**ps)
-		return (0);
+	i = 1;
+	while (i < n)
+	{
+		if (a[i - 1] > a[i])
+			return (0);
+		i++;
+	}
 	return (1);
 }
 
-int	read_sign(const char **ps)
+int	has_duplicates(int *a, int n)
 {
-	int	sign;
+	int	i;
+	int	j;
 
-	sign = 1;
-	if (**ps == '+' || **ps == '-')
+	i = 0;
+	while (i < n)
 	{
-		if (**ps == '-')
-			sign = -1;
-		(*ps)++;
+		j = i + 1;
+		while (j < n)
+		{
+			if (a[i] == a[j])
+				return (1);
+			j++;
+		}
+		i++;
 	}
-	if (!is_digit(**ps))
-		error_exit();
-	return (sign);
+	return (0);
 }

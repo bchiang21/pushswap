@@ -41,6 +41,18 @@ int		has_duplicates(int *a, int n);
 int		is_sorted(int *a, int n);
 void	error_exit(void);
 int		index_of_min(int *a, int size_a);
+int		is_digit(char c);
+int		skip_spaces(const char **ps);
+int		is_space(char c);
+int		read_sign(const char **ps);
+long	read_value(const char **ps, int sign);
+int		parse_next_int(const char **ps, int *out);
+int		count_numbers_in_str(const char *s);
+int		count_numbers(int argc, char **argv);
+void	load_args(int argc, char **argv, int *a, int size_a);
+void	run_push_swap(int argc, char **argv);
+int		is_sorted(int *a, int n);
+int		has_duplicates(int *a, int n);
 
 /*  algorithms  */
 

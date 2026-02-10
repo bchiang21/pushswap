@@ -1,2 +1,0 @@
-argc==2 (ARG was quoted / single string)
-Error

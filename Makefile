@@ -23,6 +23,8 @@ SRCS	= main.c \
 		  core_func_print.c \
 		  func_print_2.c \
 		  utilities.c \
+		  utilities_2.c \
+		  utilities_3.c \
 		  if_small.c \
 		  if_very_small.c
 

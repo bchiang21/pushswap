@@ -15,31 +15,16 @@
 #include <limits.h>
 #include "push_swap.h"
 
-static void	load_args(int argc, char **argv, int *a, int size_a)
-{
-	int	i;
-
-	i = 0;
-	while (i < size_a)
-	{
-		if (!parse_int(argv[i + 1], &a[i]))
-			error_exit();
-		i++;
-	}
-	(void)argc;
-}
-
-int	main(int argc, char **argv)
+void	run_push_swap(int argc, char **argv)
 {
 	int	*a;
 	int	*b;
 	int	size_a;
 	int	size_b;
 
-	if (argc <= 1)
-		return (0);
-	size_a = argc - 1;
-	size_b = 0;
+	size_a = count_numbers(argc, argv);
+	if (size_a <= 0)
+		error_exit();
 	a = (int *)malloc(sizeof(int) * size_a);
 	b = (int *)malloc(sizeof(int) * size_a);
 	if (!a || !b)
@@ -47,8 +32,16 @@ int	main(int argc, char **argv)
 	load_args(argc, argv, a, size_a);
 	if (has_duplicates(a, size_a))
 		error_exit();
+	size_b = 0;
 	sort_dispatch(a, &size_a, b, &size_b);
 	free(a);
 	free(b);
+}
+
+int	main(int argc, char **argv)
+{
+	if (argc <= 1)
+		return (0);
+	run_push_swap(argc, argv);
 	return (0);
 }
